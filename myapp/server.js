@@ -1,21 +1,47 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var cors = require('cors'); // We will use CORS to enable cross origin domain requests.
+require('dotenv/config');
+
 
 const passport        =     require('passport')
   , FacebookStrategy  =     require('passport-facebook').Strategy
   , session           =     require('express-session')
   , cookieParser      =     require('cookie-parser')
   , config            =     require('./configuration/config')
-  , mysql             =     require('mysql')
+//, mysql             =     require('mysql')
 
-//Define MySQL parameter in Config.js file.
+/*Define MySQL parameter in Config.js file.
 const pool = mysql.createPool({
   host     : config.host,
   user     : config.username,
   password : config.password,
   database : config.database
+});*/
+
+
+//Schema del database
+var schemaName = new Schema({
+  request: String,
+  time: Number
+  }, {
+  collection: 'collectionName'
 });
+
+var Model = mongoose.model('Model', schemaName);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Connected to DB');
+});
+
+//Connessione al DB
+mongoose.connect(process.env.DB_CONNECTION,
+  { useNewUrlParser: true,
+    useUnifiedTopology: true } );
 
 
 app.use(bodyParser.json());
