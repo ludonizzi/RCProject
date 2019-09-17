@@ -8,14 +8,23 @@
 </head>
 
 <body>
-<br>
-<div class="topnav">
-        <a class="active" href="home">Home</a>
-        <a href="about">About App</a>
-        <a href="contatti">Contatti</a>
-        <a href="url_info">Info</a>
-        <li style="float:right"><a href="login">Accedi con Facebook</a></li>
-</div>
+<% if (!user) { %>
+        <div class="topnav">
+                <a class="active" href="home">Home</a>
+                <a href="about">About App</a>
+                <a href="contatti">Contatti</a>
+                <a href="url_info">Info</a>
+                <li style="float:right"><a href="/auth/facebook"><img src="fb-login.jpg" width="155" height="18"></a></li>
+        </div>
+<% } else { %>
+            <div class="topnav">
+                    <a class="active" href="home">Home</a>
+                    <a href="about">About App</a>
+                    <a href="contatti">Contatti</a>
+                    <a href="profile">Profilo</a>
+                    <li style="float:right"><a href="/logout" class="btn btn-default btn-sm">Logout</a></li>
+            </div>
+<% } %>
 
 <div style="width:750px;height:180px;background-color:#ececec;padding:75px;margin-left:0,5%;margin-top:2%;">
 <h1>Contatti</h1>

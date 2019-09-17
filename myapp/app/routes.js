@@ -3,21 +3,16 @@ var User = require('./models/user');
 module.exports = function(app, passport){
 
 app.get('/about', function(req,res) {
-    res.render('./about.ejs');
+    res.render('./about.ejs', { user: req.user });
 })
 
 app.get('/home', function(req,res) {
-    res.render('./index.ejs');
+    res.render('./index.ejs', { user: req.user });
 })
 
 app.get('/contatti', function(req,res) {
-    res.render('./contatti.ejs');
+    res.render('./contatti.ejs', { user: req.user });
 })
-
-app.get('/login', function(req,res) {
-    res.render('./loginFB.ejs', {message: req.flash('loginMessage')});
-})
-
 
 app.get('/greetings/:name', function(req,res) { //quando arriva una get con url /greetings allora renderizza il file index.jade
     var userName = req.params.name; //url parametrico
