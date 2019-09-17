@@ -32,15 +32,29 @@ app.post('/new-user', (req,res) => {
     res.render('user-confirm', message);
 })
 
+app.post('/signup', passport.authenticate('local-signup', {
+  successRedirect: '/login',
+  failureRedirect: '/signup',
+  failureFlash: true
+}));
 
+app.post('/login', passport.authenticate('local-login', {
+  successRedirect: '/profile',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
 
-
-//app.set('views', __dirname + '/views');
-
-//app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
   res.render('index', { user: req.user });
+});
+
+app.get('/signup', function(req, res){
+  res.render('signup.ejs',  { message: req.flash('signupMessage') });
+});
+
+app.get('/login', function(req, res){
+  res.render('login.ejs',  { message: req.flash('loginMessage') });
 });
 
 app.get('/account', isLoggedIn, function(req, res){
