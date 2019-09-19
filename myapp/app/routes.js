@@ -90,6 +90,10 @@ app.post('/new-user', (req,res) => {
     res.render('user-confirm', message);
 })
 
+app.get('/chat', function(req, res){
+  res.render('./chat.ejs', {user: req.user});
+})
+
 app.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/profile',
   failureRedirect: '/signup',
