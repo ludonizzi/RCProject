@@ -54,13 +54,15 @@
                       <input id="submit" type="button" value="Viaggia">
                       <input id="what" type="textbox" placeholder="cosa cerchi?">
                       <input id="sushi" type = "button" value="Cerca">
+                      <input id="delete" type = "button" value="Clear">
                     </div>
           
           
                     <div id="map"></div>
                     </div>
                     <script>
-                      
+                  
+              var markers=[];
               let pos;
               let map;
               let bounds;
@@ -99,7 +101,12 @@
                         });
                     document.getElementById('sushi').addEventListener('click', function() {
                     // Call Places Nearby Search on user's location
+                        deleteMarkers();
                         getNearbyPlaces(pos);
+                         });
+                    document.getElementById('delete').addEventListener('click', function() {
+                    //Delete markers in the map
+                        deleteMarkers();
                          });
                   }, () => {
                     // Browser supports geolocation, but user has denied permission
@@ -110,7 +117,13 @@
                   handleLocationError(false, infoWindow);
                 }
               }
-          
+              
+              function deleteMarkers() {
+                for (var i = 0; i < markers.length; i++) {
+                  markers[i].setMap(null);
+                }
+                markers = [];
+              }
               // Handle a geolocation error
               function handleLocationError(browserHasGeolocation, infoWindow) {
                 // Set default location to Sydney, Australia
@@ -154,14 +167,14 @@
               // Set markers at the location of each place result
               function createMarkers(places) {
                 places.forEach(place => {
-                  let marker = new google.maps.Marker({
+                  var marker = new google.maps.Marker({
                     position: place.geometry.location,
                     map: map,
-                    title: place.name
-                  });
-          
+                    title: place.name,
+                  });          
                   // Adjust the map bounds to include the location of this marker
                   bounds.extend(place.geometry.location);
+                  markers.push(marker);
                 });
               }
           
@@ -174,6 +187,7 @@
                               map: resultsMap,
                               position: results[0].geometry.location
                             });
+                            markers.push(marker);
                             pos = results[0].geometry.location;
                           } else {
                             alert('Geocode was not successful for the following reason: ' + status);
