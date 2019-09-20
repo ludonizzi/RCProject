@@ -77,20 +77,7 @@ app.get('/contatti', function(req,res) {
     res.render('./contatti.ejs', { user: req.user });
 })
 
-app.post('/new-user', (req,res) => {
-    console.log('This is the body:', req.body);
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var message = {
-                   title: 'The user was created',
-                   text: 'User created',
-                   firstName: firstName,
-                   lastName: lastName
-                    }
-    res.render('user-confirm', message);
-})
-
-app.get('/chat', function(req, res){
+app.get('/chat', isLoggedIn, function(req, res){
   res.render('./chat.ejs', {user: req.user});
 })
 
