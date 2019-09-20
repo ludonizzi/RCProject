@@ -32,3 +32,9 @@ L'applicazione da la possibilità, ai soli utenti registrati, di localizzarsi e 
 ## **OAUTH**
 
 - Facebook Login: Implementato con Passport, richiede l'autenticazione e restituisce le informazioni base del proprio profilo(id,nome,email,photo), e queste informazioni vengono memorizzate come .json nella collection users del database.
+
+## **Funzionalità**
+
+- Web Socket: In `server.js` viene inizializzato il server sulla porta 8080, e si connette al proprio server. Prende il messaggio facendo il parsing JSON e lo inoltra, tramite la funzione `broadcast`, a tutti i client connessi. In `chat.ejs` viene gestito l'inivio del messaggio alla WebSocket tramite la funzione `send` e lo visualizza tramite la funzione `onmessage`. 
+
+- RabbitMQ: In `routes.js` viene generato, per ogni get request, la connessione e creazione del canale di comunicazione con il reciever, che poi provvederà ad inviare il messaggio tramite la funzione `sendToQueue`. Il reciever, una volta avviato, riceverà sulla propria console, tutte le richieste fatte all'interno della nostra applicazione tramite la funzione `consume`. 
