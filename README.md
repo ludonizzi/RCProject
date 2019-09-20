@@ -1,5 +1,5 @@
 # PlacesJS
-Progetto di Reti di Calcolatori
+L'applicazione da la possibilità, ai soli utenti registrati, di localizzarsi e cercare punti d'interesse in un range prestabilito.
 
 ## **Requisiti**
 - [x] Il servizio REST implementato deve interfacciare almeno due servizi REST *esterni*, cioè non su localhost
@@ -10,3 +10,25 @@ Progetto di Reti di Calcolatori
 - [x] Il progetto deve essere su GITHUB
 - [x] Le API del servizio REST implementato devono essere documentate su GITHUB
 
+## **Avvio**
+
+- Per installare le dipendenze eseguire `npm install`, verranno lette dal file *package.json* e installate.
+
+- Per avviare il server eseguire `node server`.
+
+- RabbitMQ(porta 5672) e WebSocket(porta 8080) devono essere in esecuzione su _localhost_.
+
+- La connessione a MongoDB avviene tramite mongoose.connect(mongodb+srv://Progetto_Reti:<password>@clusterproject-h6kaj.mongodb.net/test?retryWrites=true&w=majority).
+  
+- Per la parte asincrona eseguire `./reciever.js` nella directory rabbitMQ.
+
+## **REST API**
+
+- Google Api:
+  - Geocode: tramite una get passando l'indirizzo del luogo richiesto ci ritorna le sue informazioni dalle quali verranno prese latitudine e longitudine.
+  
+  - NearbySearch: si effettua una richiesta passando latitudine, longitudine, il tipo di cosa si sta ricercando e il raggio d'interesse per trovare un insieme di luoghi di quel tipo.
+
+## **OAUTH**
+
+- Facebook Login: Implementato con Passport, richiede l'autenticazione e restituisce le informazioni base del proprio profilo(id,nome,email,photo), e queste informazioni vengono memorizzate come .json nella collection users del database.
