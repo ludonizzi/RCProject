@@ -27,7 +27,11 @@ L'applicazione da la possibilità, ai soli utenti registrati, di localizzarsi e 
 - Google Api:
   - Geocode: tramite una get passando l'indirizzo del luogo richiesto ci ritorna le sue informazioni dalle quali verranno prese latitudine e longitudine.
   
-  - NearbySearch: si effettua una richiesta passando latitudine, longitudine, il tipo di cosa si sta ricercando e il raggio d'interesse per trovare un insieme di luoghi di quel tipo.
+  - NearbySearch: si effettua una richiesta passando latitudine, longitudine, il tipo di cosa si sta ricercando e il raggio d'interesse per trovare un insieme di luoghi di quel tipo. La ricerca può esser fatta su: 
+
+airport   aquarium    atm   bank    bar     bus_station   cafe    cemetery    doctor    electrician   gym         hardware_store
+hospital  library     liquor_store  museum  night_club    park    parking     police    post_office   restaurant  school
+stadium   store       supermarket   train_station
 
 ## **OAUTH**
 
